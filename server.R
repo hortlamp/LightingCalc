@@ -452,18 +452,54 @@ function(input, output, session) {
     weekavg1 <- unlist(weekavg)
     week1 <- unlist(weekStart)
     
-    #Manually adjust overlapping months
-    weekavg1[4] <- AP_values$PerOfOne[[1]]
-    weekavg1[8] <- AP_values$PerOfOne[[2]]
-    weekavg1[13] <- (3*AP_values$PerOfOne[[3]] + 4*AP_values$PerOfOne[[4]])/7
-    weekavg1[17] <- (5*AP_values$PerOfOne[[4]] + 2*AP_values$PerOfOne[[5]])/7
-    weekavg1[26] <- (3*AP_values$PerOfOne[[6]] + 4*AP_values$PerOfOne[[7]])/7
-    weekavg1[30] <- (6*AP_values$PerOfOne[[7]] + 1*AP_values$PerOfOne[[8]])/7
-    weekavg1[35] <- (2*AP_values$PerOfOne[[8]] + 5*AP_values$PerOfOne[[9]])/7
-    weekavg1[39] <- (4*AP_values$PerOfOne[[9]] + 3*AP_values$PerOfOne[[10]])/7
-    weekavg1[43] <- AP_values$PerOfOne[[10]]
-    weekavg1[48] <- (2*AP_values$PerOfOne[[11]] + 5*AP_values$PerOfOne[[12]])/7
-    weekavg1[52] <- AP_values$PerOfOne[[12]]
+    #Manually adjust overlapping months (easy). This and next year are done. Takes 3-5 mins.
+    if (lubridate::year(as.Date(Sys.Date(), format = "%Y-%m-%d")) == 2022){
+      weekavg1[5] <- (1*AP_values$PerOfOne[[1]] + 6*AP_values$PerOfOne[[2]])/7
+      weekavg1[9] <- (1*AP_values$PerOfOne[[2]] + 6*AP_values$PerOfOne[[3]])/7
+      weekavg1[13] <- (4*AP_values$PerOfOne[[3]] + 3*AP_values$PerOfOne[[4]])/7
+      weekavg1[17] <- (6*AP_values$PerOfOne[[4]] + 1*AP_values$PerOfOne[[5]])/7
+      weekavg1[22] <- (2*AP_values$PerOfOne[[5]] + 5*AP_values$PerOfOne[[6]])/7
+      weekavg1[26] <- (4*AP_values$PerOfOne[[6]] + 3*AP_values$PerOfOne[[7]])/7
+      weekavg1[35] <- (3*AP_values$PerOfOne[[8]] + 4*AP_values$PerOfOne[[9]])/7
+      weekavg1[39] <- (5*AP_values$PerOfOne[[9]] + 2*AP_values$PerOfOne[[10]])/7
+      weekavg1[44] <- (1*AP_values$PerOfOne[[10]] + 6*AP_values$PerOfOne[[11]])/7
+      weekavg1[48] <- (3*AP_values$PerOfOne[[11]] + 4*AP_values$PerOfOne[[12]])/7
+      weekavg1[52] <- AP_values$PerOfOne[[12]] 
+    } else if (lubridate::year(as.Date(Sys.Date(), format = "%Y-%m-%d")) == 2023) {
+      weekavg1[5] <- (2*AP_values$PerOfOne[[1]] + 5*AP_values$PerOfOne[[2]])/7
+      weekavg1[9] <- (2*AP_values$PerOfOne[[2]] + 5*AP_values$PerOfOne[[3]])/7
+      weekavg1[13] <- (5*AP_values$PerOfOne[[3]] + 2*AP_values$PerOfOne[[4]])/7
+      weekavg1[22] <- (3*AP_values$PerOfOne[[5]] + 4*AP_values$PerOfOne[[6]])/7
+      weekavg1[26] <- (5*AP_values$PerOfOne[[6]] + 2*AP_values$PerOfOne[[7]])/7
+      weekavg1[31] <- (1*AP_values$PerOfOne[[7]] + 6*AP_values$PerOfOne[[8]])/7
+      weekavg1[35] <- (4*AP_values$PerOfOne[[8]] + 3*AP_values$PerOfOne[[9]])/7
+      weekavg1[39] <- (6*AP_values$PerOfOne[[9]] + 1*AP_values$PerOfOne[[10]])/7
+      weekavg1[44] <- (2*AP_values$PerOfOne[[10]] + 5*AP_values$PerOfOne[[11]])/7
+      weekavg1[48] <- (3*AP_values$PerOfOne[[11]] + 4*AP_values$PerOfOne[[12]])/7
+      weekavg1[52] <- AP_values$PerOfOne[[12]]
+    } else if (lubridate::year(as.Date(Sys.Date(), format = "%Y-%m-%d")) == 2024){ #Leap year
+      weekavg1[5] <- (3*AP_values$PerOfOne[[1]] + 4*AP_values$PerOfOne[[2]])/7
+      weekavg1[9] <- (4*AP_values$PerOfOne[[2]] + 3*AP_values$PerOfOne[[3]])/7
+      weekavg1[18] <- (2*AP_values$PerOfOne[[4]] + 5*AP_values$PerOfOne[[5]])/7
+      weekavg1[22] <- (5*AP_values$PerOfOne[[5]] + 2*AP_values$PerOfOne[[6]])/7
+      weekavg1[31] <- (3*AP_values$PerOfOne[[7]] + 4*AP_values$PerOfOne[[8]])/7
+      weekavg1[35] <- (6*AP_values$PerOfOne[[8]] + 1*AP_values$PerOfOne[[9]])/7
+      weekavg1[40] <- (1*AP_values$PerOfOne[[9]] + 6*AP_values$PerOfOne[[10]])/7
+      weekavg1[44] <- (4*AP_values$PerOfOne[[10]] + 3*AP_values$PerOfOne[[11]])/7
+      weekavg1[48] <- (6*AP_values$PerOfOne[[11]] + 1*AP_values$PerOfOne[[12]])/7
+      weekavg1[52] <- AP_values$PerOfOne[[12]]
+    } else { # for 2025 and beyond, this needs to be recalculated. Currently is the same value from 2022
+      weekavg1[5] <- (1*AP_values$PerOfOne[[1]] + 6*AP_values$PerOfOne[[2]])/7
+      weekavg1[9] <- (1*AP_values$PerOfOne[[2]] + 6*AP_values$PerOfOne[[3]])/7
+      weekavg1[13] <- (4*AP_values$PerOfOne[[3]] + 3*AP_values$PerOfOne[[4]])/7
+      weekavg1[17] <- (6*AP_values$PerOfOne[[4]] + 1*AP_values$PerOfOne[[5]])/7
+      weekavg1[22] <- (2*AP_values$PerOfOne[[5]] + 5*AP_values$PerOfOne[[6]])/7
+      weekavg1[26] <- (4*AP_values$PerOfOne[[6]] + 3*AP_values$PerOfOne[[7]])/7
+      weekavg1[35] <- (3*AP_values$PerOfOne[[8]] + 4*AP_values$PerOfOne[[9]])/7
+      weekavg1[39] <- (5*AP_values$PerOfOne[[9]] + 2*AP_values$PerOfOne[[10]])/7
+      weekavg1[44] <- (1*AP_values$PerOfOne[[10]] + 6*AP_values$PerOfOne[[11]])/7
+      weekavg1[48] <- (3*AP_values$PerOfOne[[11]] + 4*AP_values$PerOfOne[[12]])/7
+    }
     
     Area_week <- data.frame(weekavg1,week1)
     names(Area_week) <- c("Percent", "Week")
@@ -555,18 +591,54 @@ function(input, output, session) {
       weekavg1 <- unlist(weekavg)
       week1 <- unlist(weekStart)
       
-      #Manually adjust overlapping months
-      weekavg1[4] <- AP_values$PerOfOne[[1]]
-      weekavg1[8] <- AP_values$PerOfOne[[2]]
-      weekavg1[13] <- (3*AP_values$PerOfOne[[3]] + 4*AP_values$PerOfOne[[4]])/7
-      weekavg1[17] <- (5*AP_values$PerOfOne[[4]] + 2*AP_values$PerOfOne[[5]])/7
-      weekavg1[26] <- (3*AP_values$PerOfOne[[6]] + 4*AP_values$PerOfOne[[7]])/7
-      weekavg1[30] <- (6*AP_values$PerOfOne[[7]] + 1*AP_values$PerOfOne[[8]])/7
-      weekavg1[35] <- (2*AP_values$PerOfOne[[8]] + 5*AP_values$PerOfOne[[9]])/7
-      weekavg1[39] <- (4*AP_values$PerOfOne[[9]] + 3*AP_values$PerOfOne[[10]])/7
-      weekavg1[43] <- AP_values$PerOfOne[[10]]
-      weekavg1[48] <- (2*AP_values$PerOfOne[[11]] + 5*AP_values$PerOfOne[[12]])/7
-      weekavg1[52] <- AP_values$PerOfOne[[12]]
+      #Manually adjust overlapping months (easy). This and next year are done. Takes 3-5 mins.
+      if (lubridate::year(as.Date(Sys.Date(), format = "%Y-%m-%d")) == 2022){
+        weekavg1[5] <- (1*AP_values$PerOfOne[[1]] + 6*AP_values$PerOfOne[[2]])/7
+        weekavg1[9] <- (1*AP_values$PerOfOne[[2]] + 6*AP_values$PerOfOne[[3]])/7
+        weekavg1[13] <- (4*AP_values$PerOfOne[[3]] + 3*AP_values$PerOfOne[[4]])/7
+        weekavg1[17] <- (6*AP_values$PerOfOne[[4]] + 1*AP_values$PerOfOne[[5]])/7
+        weekavg1[22] <- (2*AP_values$PerOfOne[[5]] + 5*AP_values$PerOfOne[[6]])/7
+        weekavg1[26] <- (4*AP_values$PerOfOne[[6]] + 3*AP_values$PerOfOne[[7]])/7
+        weekavg1[35] <- (3*AP_values$PerOfOne[[8]] + 4*AP_values$PerOfOne[[9]])/7
+        weekavg1[39] <- (5*AP_values$PerOfOne[[9]] + 2*AP_values$PerOfOne[[10]])/7
+        weekavg1[44] <- (1*AP_values$PerOfOne[[10]] + 6*AP_values$PerOfOne[[11]])/7
+        weekavg1[48] <- (3*AP_values$PerOfOne[[11]] + 4*AP_values$PerOfOne[[12]])/7
+        weekavg1[52] <- AP_values$PerOfOne[[12]] 
+      } else if (lubridate::year(as.Date(Sys.Date(), format = "%Y-%m-%d")) == 2023) {
+        weekavg1[5] <- (2*AP_values$PerOfOne[[1]] + 5*AP_values$PerOfOne[[2]])/7
+        weekavg1[9] <- (2*AP_values$PerOfOne[[2]] + 5*AP_values$PerOfOne[[3]])/7
+        weekavg1[13] <- (5*AP_values$PerOfOne[[3]] + 2*AP_values$PerOfOne[[4]])/7
+        weekavg1[22] <- (3*AP_values$PerOfOne[[5]] + 4*AP_values$PerOfOne[[6]])/7
+        weekavg1[26] <- (5*AP_values$PerOfOne[[6]] + 2*AP_values$PerOfOne[[7]])/7
+        weekavg1[31] <- (1*AP_values$PerOfOne[[7]] + 6*AP_values$PerOfOne[[8]])/7
+        weekavg1[35] <- (4*AP_values$PerOfOne[[8]] + 3*AP_values$PerOfOne[[9]])/7
+        weekavg1[39] <- (6*AP_values$PerOfOne[[9]] + 1*AP_values$PerOfOne[[10]])/7
+        weekavg1[44] <- (2*AP_values$PerOfOne[[10]] + 5*AP_values$PerOfOne[[11]])/7
+        weekavg1[48] <- (3*AP_values$PerOfOne[[11]] + 4*AP_values$PerOfOne[[12]])/7
+        weekavg1[52] <- AP_values$PerOfOne[[12]]
+      } else if (lubridate::year(as.Date(Sys.Date(), format = "%Y-%m-%d")) == 2024){ #Leap year
+        weekavg1[5] <- (3*AP_values$PerOfOne[[1]] + 4*AP_values$PerOfOne[[2]])/7
+        weekavg1[9] <- (4*AP_values$PerOfOne[[2]] + 3*AP_values$PerOfOne[[3]])/7
+        weekavg1[18] <- (2*AP_values$PerOfOne[[4]] + 5*AP_values$PerOfOne[[5]])/7
+        weekavg1[22] <- (5*AP_values$PerOfOne[[5]] + 2*AP_values$PerOfOne[[6]])/7
+        weekavg1[31] <- (3*AP_values$PerOfOne[[7]] + 4*AP_values$PerOfOne[[8]])/7
+        weekavg1[35] <- (6*AP_values$PerOfOne[[8]] + 1*AP_values$PerOfOne[[9]])/7
+        weekavg1[40] <- (1*AP_values$PerOfOne[[9]] + 6*AP_values$PerOfOne[[10]])/7
+        weekavg1[44] <- (4*AP_values$PerOfOne[[10]] + 3*AP_values$PerOfOne[[11]])/7
+        weekavg1[48] <- (6*AP_values$PerOfOne[[11]] + 1*AP_values$PerOfOne[[12]])/7
+        weekavg1[52] <- AP_values$PerOfOne[[12]]
+      } else { # for 2025 and beyond, this needs to be recalculated. Currently is the same value from 2022
+        weekavg1[5] <- (1*AP_values$PerOfOne[[1]] + 6*AP_values$PerOfOne[[2]])/7
+        weekavg1[9] <- (1*AP_values$PerOfOne[[2]] + 6*AP_values$PerOfOne[[3]])/7
+        weekavg1[13] <- (4*AP_values$PerOfOne[[3]] + 3*AP_values$PerOfOne[[4]])/7
+        weekavg1[17] <- (6*AP_values$PerOfOne[[4]] + 1*AP_values$PerOfOne[[5]])/7
+        weekavg1[22] <- (2*AP_values$PerOfOne[[5]] + 5*AP_values$PerOfOne[[6]])/7
+        weekavg1[26] <- (4*AP_values$PerOfOne[[6]] + 3*AP_values$PerOfOne[[7]])/7
+        weekavg1[35] <- (3*AP_values$PerOfOne[[8]] + 4*AP_values$PerOfOne[[9]])/7
+        weekavg1[39] <- (5*AP_values$PerOfOne[[9]] + 2*AP_values$PerOfOne[[10]])/7
+        weekavg1[44] <- (1*AP_values$PerOfOne[[10]] + 6*AP_values$PerOfOne[[11]])/7
+        weekavg1[48] <- (3*AP_values$PerOfOne[[11]] + 4*AP_values$PerOfOne[[12]])/7
+      }
       
       
       PA_Weeks <- weekavg1
