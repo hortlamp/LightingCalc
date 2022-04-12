@@ -38,7 +38,7 @@ jscode <- "shinyjs.closeWindow = function() { window.close(); }"
 Sys.setenv(GEOCODIO_API_KEY = k$GEOCODIO_API_KEY) #HortLamp Geocodio Key
 
 # NSRDB API and URL to pull TMY data
-URLbase <- paste0('https://developer.nrel.gov/api/nsrdb_api/solar/nsrdb_psm3_tmy_download.csv?&names=tmy&attributes=ghi&email=', k$email, '&api_key=', k$NSRDB)
+URLbase <- paste0('https://developer.nrel.gov/api/nsrdb/v2/solar/psm3-tmy-download.csv?&names=tmy&attributes=ghi&email=', k$email, '&api_key=', k$NSRDB)
 
 #Create a header to be used repeatedly in the code
 Header_Details <- list(img(src = "LampLogo.png", height="30%", width="30%", align="left"),
