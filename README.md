@@ -1,2 +1,4 @@
 # lightingcalc
-A repository for the lighting calculator (calc 1) for the LAMP Project
+A repository for the lighting calculator (calc 1) for the LAMP Project.
+
+This calculator determines how much electricity is required to reach the target DLI every single day of the year. To do so, a lighting system would need to be designed to provide enough light on even the darkest day of the year. That is an unrealistic scenario, because it clearly would not be cost-effective to design your lighting system for the darkest day of the year. Because of that unrealistic assumption, this calculator does not calculate demand charges, only the cost of the electricity used. To use this web-based tool, you can add a location anywhere in the US and provide your electricity rate at that location ($/kWh). Add the daily light integral (DLI) you want to achieve and a greenhouse design to get estimated electricity cost results.
